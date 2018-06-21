@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:background="@color/Gray800">
+
+    <TextView
+        android:id="@+id/NewProjectEntryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:text="New Project Entry"
+        android:textColor="@color/White"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/NamePrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NewProjectEntryTitle"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@+id/ProjNameAdd"
+        android:layout_alignStart="@+id/ProjNameAdd"
+        android:text="Project Name:"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/ProjNameAdd"
+        android:layout_width="300dp"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_below="@+id/NamePrompt"
+        android:layout_centerInParent="true"
+        android:singleLine="true" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ProjNameAdd"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@id/ProjNameAdd"
+        android:layout_alignStart="@+id/ProjNameAdd"
+        android:text="Take photos on regular schedule" />
+
+    <TextView
+        android:id="@+id/FreqPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBox"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/ProjFreqAdd"
+        android:layout_alignStart="@+id/ProjFreqAdd"
+        android:text="Photo Frequency:"
+        android:textSize="15sp"/>
+
+    <Spinner
+        android:id="@+id/ProjFreqAdd"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FreqPrompt"
+        android:layout_centerInParent="true"
+        android:elevation="15dp"
+        android:entries="@array/Freq_Selection"
+        android:prompt="@string/Freq_Prompt"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:id="@+id/LengthGoalPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ProjFreqAdd"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/ProjFreqAdd"
+        android:layout_alignStart="@+id/ProjFreqAdd"
+        android:text="Project Length Goal:"
+        android:textSize="15sp"/>
+
+    <EditText
+        android:id="@+id/ProjLengthGoalAdd"
+        android:layout_width="300dp"
+        android:inputType="number"
+        android:textSize="15sp"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LengthGoalPrompt"
+        android:layout_centerInParent="true"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/ProjAddCommit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Add Project"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/ProjLengthGoalAdd"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorAccent"
+        />
+
+    <Button
+        android:id="@+id/ProjAddCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/ProjLengthGoalAdd"
+        android:layout_marginTop="30dp"
+        />
+
+
+</RelativeLayout>

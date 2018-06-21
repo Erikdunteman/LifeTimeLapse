@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Black"
+    android:id="@+id/welcomeScreen">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relLayout1">
+
+        <include layout="@layout/snippet_projectpreviewtoolbar"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/relLayout1">
+
+        <!--Welcome Line-->
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LifeTimeLapse"
+            android:textColor="@color/White"
+            android:textSize="25sp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/Title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change is good. I've captured it:"
+            android:textColor="@color/White"
+            android:textSize="15sp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/Title"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/Title2"
+            android:layout_above="@id/previewFrame"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Project"
+                android:textSize="20sp"
+                android:textColor="@color/Gray500"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/previewFrame"
+            android:layout_width="match_parent"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Title2"
+            android:layout_marginBottom="25dp"
+            android:contentDescription="previewFrame"
+            />
+
+        <ImageView
+            android:id="@+id/playVid"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_play"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    </RelativeLayout>

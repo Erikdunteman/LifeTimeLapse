@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ Copyright 2014 The Android Open Source Project
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/captureEffect"
+        android:background="@color/White"
+        android:elevation="10dp"
+        android:alpha="0.3"
+        android:visibility="gone"
+        />
+
+    <com.erikdunteman.erik.lifetimelapse.utils.AutoFitTextureView
+        android:id="@+id/texture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+
+    <ImageView
+        android:id="@+id/ghost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/texture"
+        android:layout_centerVertical="true"
+        android:elevation="1dp"
+        android:alpha=".75"
+        />
+
+    <TextView
+        android:id="@+id/ghostfirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:layout_centerInParent="true"
+        android:elevation="2dp"
+        android:maxLines="2"
+        android:lines="2"
+        android:text="Welcome To The Start Of Your Project!\nTake Your First Photo."
+    />
+    <TextView
+        android:id="@+id/ghostsecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:textSize="15sp"
+        android:textAlignment="center"
+        android:layout_centerInParent="true"
+        android:elevation="2dp"
+        android:maxLines="4"
+        android:lines="4"
+        android:text="Welcome To Your Second Photo.\n \nTry To Line Up Perfectly\nWith The Previous Shot."
+        />
+
+    <ImageView
+        android:id="@+id/camSwap"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:elevation="2dp"
+        />
+
+    <RelativeLayout
+        android:layout_toLeftOf="@id/camSwap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        >
+
+        <SeekBar
+            android:id="@+id/alphaSlider"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:progressDrawable="@color/White"
+            android:thumb="@drawable/ic_linear_fade_flip"
+            android:visibility="invisible"
+            />
+
+    </RelativeLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:src="@color/Gray100"
+        android:alpha=".1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:adjustViewBounds="false"
+        android:elevation="2dp"
+        app:civ_border_color="@color/Black"
+        app:civ_border_width="0dp"
+        app:civ_fill_color="@color/Gray800" />
+
+    <ImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/capture"
+        android:src="@drawable/ic_capture"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:adjustViewBounds="false"
+        android:elevation="3dp"/>
+
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:visibility="invisible"/>
+
+</RelativeLayout>

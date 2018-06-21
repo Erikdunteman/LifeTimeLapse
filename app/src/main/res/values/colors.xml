@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Blue1">#1b7aff</color>
+    <color name="Blue2">#1e30a1</color>
+    <color name="colorAccent">#5fde6b</color>
+    <color name="colorTheme1">#ffea00</color>
+
+    <color name="Red1">#cc3300</color>
+    <color name="Red2">#4d1300</color>
+
+    <color name="White">#FFF</color>
+    <color name="Black">#000</color>
+    <color name="Gray100">#F5F5F5</color>
+    <color name="Gray200">#EEEEEE</color>
+    <color name="Gray300">#E0E0E0</color>
+    <color name="Gray400">#BDBDBD</color>
+    <color name="Gray500">#9e9e9e</color>
+    <color name="Gray600">#757575</color>
+    <color name="Gray700">#616161</color>
+    <color name="Gray800">#424242</color>
+    <color name="Gray900">#212121</color>
+
+</resources>

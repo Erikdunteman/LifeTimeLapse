@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">LifeTimeLapse</string>
+
+
+
+    <string name = "Freq_Prompt">Photo Frequency</string>
+    <string-array name="Freq_Selection">
+        <item>Hourly</item>
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Bi-Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+
+    <!-- fragment names -->
+    <string name="edit_project_fragment">EditProjectFragment</string>
+    <string name="project_info_fragment">ProjectInfoFragment</string>
+    <string name="projects_menu_fragment">ProjectsMenuFragment</string>
+
+    <!-- keys -->
+    <string name="project">Project</string>
+
+    <!-- strings from camera copyover -->
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_camera_permission">Please grant Camera permissions.</string>
+    <string name="request_storage_permission">Please grant Storage permissions.</string>
+    <string name="camera_error">This device does not support Camera2 API.</string>
+    <string name="intro_message">Welcome</string>
+
+
+</resources>

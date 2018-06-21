@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Gray800">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relLayout1">
+
+            <include layout="@layout/snippet_projectinfotoolbar"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relLayout1"
+            android:id="@+id/relLayout2">
+
+            <View
+                android:id="@+id/anchor"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerInParent="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/projectInfoImage1"
+                android:src="@drawable/ic_face"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:elevation="10dp"
+                app:civ_border_width="0dp"
+                app:civ_fill_color="@color/Gray800"
+                app:civ_border_color="@color/Gray800"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="25dp"
+                android:layout_toLeftOf="@id/anchor"
+                android:layout_toStartOf="@id/anchor"
+                android:layout_marginRight="35dp"
+                android:layout_marginEnd="35dp"
+                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/projectInfoImage2"
+                android:src="@drawable/ic_smile"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:elevation="10dp"
+                app:civ_fill_color="@color/Gray800"
+                app:civ_border_width="0dp"
+                app:civ_border_color="@color/Black"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/projectInfoImageAdd"
+                android:src="@color/colorAccent"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@id/anchor"
+                android:layout_toRightOf="@id/anchor"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:elevation="10dp"
+                app:civ_border_color="@color/Black"
+                app:civ_border_width="0dp"
+                app:civ_fill_color="@color/Gray800" />
+
+            <ImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/projectInfoImageAddIcon"
+                android:src="@drawable/ic_pictureadd_white"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="55dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="45dp"
+                android:layout_toEndOf="@id/anchor"
+                android:layout_toRightOf="@id/anchor"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:elevation="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="110dp"
+                android:layout_toEndOf="@id/anchor"
+                android:layout_toRightOf="@id/anchor"
+                android:elevation="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="New Entry"
+                    android:textSize="20sp"
+                    android:textColor="@color/White"
+                    />
+
+            </RelativeLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/projectInfoImageAdd">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:textSize="35sp"
+                    android:textColor="@color/White"
+                    android:layout_marginStart="20dp"
+                    android:id="@+id/projectInfoName"
+                    android:text="Project Name"
+                    />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/projectInfoName"
+                        android:background="@color/White"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:elevation="20dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/projectInfoFreq"
+                            android:text="A [Frequency] Photo Project"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="@color/Gray800"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginBottom="15dp"
+
+                            />
+                        <TextView
+                            android:id="@+id/projectInfoLength"
+                            android:text="[Length] photos taken"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/projectInfoFreq"
+                            android:textSize="20sp"
+                            android:textColor="@color/Gray800"
+                            android:layout_marginStart="20dp"
+                            />
+                        <TextView
+                            android:id="@+id/projectInfoLengthGoal"
+                            android:text="[dif] photus from your goal of [goal]"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/projectInfoLength"
+                            android:textSize="20sp"
+                            android:maxLines="2"
+                            android:textColor="@color/Gray800"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginStart="20dp"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                <!--<Button-->
+                <!--android:id="@+id/projectVideoWatch"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:textSize="14dp"-->
+                <!--android:textColor="@color/White"-->
+                <!--android:text="Watch Progress Video"-->
+                <!--/>-->
+
+
+
+                <!-- would be nice for showing progress, in place of textviews
+                <ProgressBar
+                    android:id="@+id/projectProgressBar"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/projectInfoFreq"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="40dp"
+                    />
+
+                    -->
+
+                </RelativeLayout>
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
