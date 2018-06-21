@@ -16,8 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.erikdunteman.erik.lifetimelapse.models.Project;
 import com.erikdunteman.erik.lifetimelapse.models.ProjectDB;
 import com.erikdunteman.erik.lifetimelapse.models.User;
+import com.erikdunteman.erik.lifetimelapse.utils.DatabaseHelper;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -51,7 +53,7 @@ public class ProjectAddFragment extends Fragment {
     private String mProjLengthGoal;
     private ArrayList<String> mProjectNames;
     private ArrayList<String> prevSavedProjectNames;
-    private ProjectDB  mProjectDB;
+    private Project  mProject;
 
 
     private int Regular = 0;
@@ -118,50 +120,54 @@ public class ProjectAddFragment extends Fragment {
         });
 
         save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "onClick: Project Add Committed");
-                String mProjName = projName.getText().toString();
-                Long timeStamp = new Date().getTime();
-                final String timeStampString = timeStamp.toString();
-                if(getRegular()==1) {
-                    String mProjFreq = projFreq.getSelectedItem().toString();
-                    String mProjLengthGoal = projLengthGoal.getText().toString();
-                    ProjectDB project = new ProjectDB(mProjName,mProjFreq,"0",mProjLengthGoal,timeStampString);
-                    mProjectDB = project;
-                    Log.d(TAG, "onClick: New Regular project Created: " + project.toString());
-                } else {
-                    String mProjFreq = "";
-                    String mProjLengthGoal = "";
-                    ProjectDB project = new ProjectDB(mProjName,mProjFreq,"0",mProjLengthGoal,timeStampString);
-                    Log.d(TAG, "onClick: New Irregular project Created: " + project.toString());
-                    mProjectDB = project;
-                }
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.d(TAG, "onClick: Project Add Committed");
+                                        String mProjName = projName.getText().toString();
+                                        Long timeStamp = new Date().getTime();
+                                        final String timeStampString = timeStamp.toString();
+                                        if (getRegular() == 1) {
+                                            String mProjFreq = projFreq.getSelectedItem().toString();
+                                            String mProjLengthGoal = projLengthGoal.getText().toString();
+                                            Project project = new Project(mProjName, mProjFreq, "0", mProjLengthGoal, timeStampString);
+                                            mProject = project;
+                                            Log.d(TAG, "onClick: New Regular project Created: " + project.toString());
+                                            addProject(project, mProjName);
+                                        } else {
+                                            String mProjFreq = "";
+                                            String mProjLengthGoal = "";
+                                            Project project = new Project(mProjName, mProjFreq, "0", mProjLengthGoal, timeStampString);
+                                            mProject = project;
+                                            Log.d(TAG, "onClick: New Irregular project Created: " + project.toString());
+                                            addProject(project, mProjName);
+                                        }
+
+                                        Toast.makeText(getActivity(), "Project Saved!", Toast.LENGTH_SHORT).show();
+                                        //remove previous fragment from the backstack, therefore navigating back
+                                        getActivity().getSupportFragmentManager().popBackStack();
+                                        if (mInterstitialAd.isLoaded()) {
+                                            mInterstitialAd.show();
+                                        }
+
+                                    }
+                                });
 
 
 
-                String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                //Original method for add
+//                String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//                //Attempting to upload to projects
+//                Log.d(TAG, "onClick: uploading new project to projects");
+//                FirebaseDatabase.getInstance().getReference().
+//                        child("projects")
+//                        .child(uID)
+//                        .child(timeStampString)
+//                        .setValue(mProjectDB);
+//
+//                getUserAccountData(timeStampString);
 
-                //Attempting to upload to projects
-                Log.d(TAG, "onClick: uploading new project to projects");
-                FirebaseDatabase.getInstance().getReference().
-                        child("projects")
-                        .child(uID)
-                        .child(timeStampString)
-                        .setValue(mProjectDB);
 
-                getUserAccountData(timeStampString);
-
-                Toast.makeText(getActivity(), "Project Saved!", Toast.LENGTH_SHORT).show();
-                //remove previous fragment from the backstack, therefore navigating back
-                getActivity().getSupportFragmentManager().popBackStack();
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                }
-
-            }
-
-        });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,5 +236,38 @@ public class ProjectAddFragment extends Fragment {
         }
     }
 
+    //Check to see if contact is null
+    private boolean checkStringIfNull(String string){
+        if(string.equals("")){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    //New Method
+    private void addProject(Project project, String projName){
+        Log.d(TAG, "onClick: attempting to save new project.");
+        if(checkStringIfNull(projName)){
+            Log.d(TAG, "onClick: saving new project:  " + projName);
+
+            DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
+
+            if(databaseHelper.addProject(project)){
+                Toast.makeText(getActivity(), "Project Saved",Toast.LENGTH_LONG).show();
+                getActivity().getSupportFragmentManager().popBackStack();
+            }else{
+                Toast.makeText(getActivity(), "Error Saving",Toast.LENGTH_LONG).show();
+
+            }
+
+        }else{
+            Log.d(TAG, "onClick: No contact name to save");
+            Toast.makeText(getActivity(), "Give Contact a name, please" ,Toast.LENGTH_LONG).show();
+
+        }
+    }
+
 
 }
+

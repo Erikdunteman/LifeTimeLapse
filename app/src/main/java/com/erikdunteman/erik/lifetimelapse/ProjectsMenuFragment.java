@@ -1,6 +1,7 @@
 package com.erikdunteman.erik.lifetimelapse;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -19,10 +20,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erikdunteman.erik.lifetimelapse.models.Project;
 import com.erikdunteman.erik.lifetimelapse.models.ProjectDB;
 import com.erikdunteman.erik.lifetimelapse.models.User;
+import com.erikdunteman.erik.lifetimelapse.utils.DatabaseHelper;
 import com.erikdunteman.erik.lifetimelapse.utils.ProjectsMenuCVAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -129,6 +132,11 @@ public class ProjectsMenuFragment extends Fragment {
             }
         });
 
+
+        setupProjectsList();
+        Log.d(TAG, "onCreateView: Project List Set Up");
+        
+
         return view;
     }
 
@@ -206,6 +214,7 @@ public class ProjectsMenuFragment extends Fragment {
     private void setupProjectsList() {
         final ArrayList<Project> projects = getProjectsFromDB();
         mProjects = projects;
+        Log.d(TAG, "setupProjectsList:"+ projects.toString());;
 
 
         //sort the arraylist based on project name
@@ -249,67 +258,61 @@ public class ProjectsMenuFragment extends Fragment {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     private ArrayList<Project> getProjectsFromDB() {
         final ArrayList<Project> projects = new ArrayList<Project>();
+
+
         //Get the user's project names
-        Log.d(TAG, "setupProjectsList: Getting Project Names (timestamps) from User Node");
-        final String uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                .child("users")
-                .child(uID);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Log.d(TAG, "onDataChange: entered");
-                Log.d(TAG, "onDataChange: datasnapshot: " + dataSnapshot.toString());
-                //Testing to see if project list exists
-                if(dataSnapshot.getValue(User.class)!=null && dataSnapshot.getValue(User.class).getProjectNames()!=null){
-                    NoProjectPrompt.setVisibility(View.GONE);
-                    User user = dataSnapshot.getValue(User.class);
+       //New test method
+        Project project1 = new Project("Landscape Test","","","","1");
+        Project project2 = new Project("Landscape Test 2","","","","2");
+        Project project3 = new Project("Landscape Test 3","","","","3");
 
-                    Log.d(TAG, "onDataChange: found user: "
-                            + user.toString());
-                    ArrayList<String> projecttimestamps = user.getProjectNames();
-                    Log.d(TAG, "onDataChange: recovered projectlist: " + projecttimestamps.toString());
+        projects.add(project1);
+        projects.add(project2);
+        projects.add(project3);
 
-                    //Now to use those projecttimestamps for getting and adding full project info to projects list
-                    Log.d(TAG, "onDataChange: Iterating through projects with the timestamps and adding to list for listview");
-                    for(final String projecttimestamp : projecttimestamps){
-                        //Use that projecttimestamp to identify individual projects.
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference()
-                                .child("projects")
-                                .child(uID)
-                                .child(projecttimestamp);
-                        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                ProjectDB project = dataSnapshot.getValue(ProjectDB.class);
-                                if (project != null){
-                                    Project proj = new Project(project.getProjName(), project.getProjFreq(), project.getProjLength(), project.getProjLengthGoal(), project.getProjPhotoTag());
-                                    Log.d(TAG, "onDataChange: Project loaded, to string: " + proj.toString());
-                                    projects.add(proj);
-                                    Log.d(TAG, "setupProjectsList: Resetting Adapter after adding: proj = " + proj.toString());
-                                }
+        Log.d(TAG, "getProjectsFromDB: projects manually added: " + projects.toString());
 
+        Log.d(TAG, "getProjectsFromDB: Attempting to add DB projects");
+        DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
+        Cursor cursor = databaseHelper.getAllProjects();
+        if(!cursor.moveToNext()){
+            Toast.makeText(getActivity(), "There are no projects to show", Toast.LENGTH_SHORT).show();
+        }
 
-                                adapter = new ProjectsMenuCVAdapter(getActivity(), R.layout.layout_projectscardview, mProjects, "");
-                                projectsList.setAdapter(adapter);
-                            }
-                            @Override public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
-                    }
-                }else { //the projectlist is null
-                    Log.d(TAG, "onDataChange: recovered project list: user has no projects");
-                    NoProjectPrompt.setVisibility(View.VISIBLE);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        while (cursor.moveToNext()){
+            projects.add(new Project(
+                    cursor.getString(1), //name
+                    cursor.getString(2), //freq
+                    cursor.getString(3), //length
+                    cursor.getString(4), //length goal
+                    cursor.getString(5) //photo tag
+            ));
+        }
+        Log.d(TAG, "getProjectsFromDB: projects, manual and DB: " + projects.toString());
 
+        if (projects == null){
+            NoProjectPrompt.setVisibility(View.VISIBLE);
+        } else{
+            NoProjectPrompt.setVisibility(View.GONE);
+        }
+
+        adapter = new ProjectsMenuCVAdapter(getActivity(), R.layout.layout_projectscardview, projects, "");
+        projectsList.setAdapter(adapter);
         return projects;
     }
 
